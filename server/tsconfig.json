@@ -9,7 +9,6 @@
     "strict": true,
     "baseUrl": "."
   },
-  "include": ["server", "shared"],
   "exclude": ["node_modules", "dist"],
   "extends": "../tsconfig.json"
 }

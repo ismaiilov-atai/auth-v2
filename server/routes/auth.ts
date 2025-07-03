@@ -1,9 +1,9 @@
 import { validateUserInput } from '../middlewares/validateUserInput'
 import { UserModel, IUser } from '../models/userSchema'
 import { userSchema } from '@shared/zod/userSchema'
+import { generateJwtToken } from 'server/utils/JWT'
 import { compareSync } from 'bcrypt-ts'
 import { Router } from 'express'
-import { generateJwtToken } from 'server/utils/JWT'
 
 const authRoute = Router()
 

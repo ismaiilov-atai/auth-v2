@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev:server": "tsx watch server/server.ts"
+    "dev:server": "tsx watch server/server.ts",
+    "dev:frontend": "vite frontend/src --port 3000"
   },
   "dependencies": {
     "zod": "^3.25.67"

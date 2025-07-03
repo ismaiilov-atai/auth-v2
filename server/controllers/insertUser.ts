@@ -10,7 +10,7 @@ export const insertUser = async (req: Request, res: Response) => {
     const existingUser = await UserModel.findOne({ email })
 
     if (existingUser) {
-      res.status(409).json({ message: 'User already exists' })
+      res.status(409).json({ error: 'User already exists' })
       return
     }
 

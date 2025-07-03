@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { validateToken } from 'server/utils/JWT'
+import { validateToken } from '../utils/JWT'
 
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
-  console.log('Auth Middleware:', req.path)
 
   if (req.path === '/user' || req.path === '/user/auth') {
     next()
