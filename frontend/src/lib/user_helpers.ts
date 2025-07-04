@@ -1,6 +1,6 @@
 import type { UserInsertResponse, UserType } from '@/shared/types/User'
-import api from './api'
 import axios from 'axios'
+import api from './api'
 
 export const inserUser = async (body: UserType): Promise<UserInsertResponse> => {
   try {
@@ -13,7 +13,6 @@ export const inserUser = async (body: UserType): Promise<UserInsertResponse> => 
       return { error: (error as Error).message }
     }
   }
-
 }
 
 export const authUser = async (body: UserType): Promise<UserInsertResponse> => {
@@ -22,6 +21,6 @@ export const authUser = async (body: UserType): Promise<UserInsertResponse> => {
 }
 
 export const checkUser = async (): Promise<{ user: string }> => {
-  const response = await api.get('/')
+  const response = await api.get('/user')
   return response.data
 }
