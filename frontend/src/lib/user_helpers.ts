@@ -20,3 +20,8 @@ export const authUser = async (body: UserType): Promise<UserInsertResponse> => {
   const response = await api.post('/user/auth', body)
   return response.data
 }
+
+export const checkUser = async (): Promise<{ user: string }> => {
+  const response = await api.get('/')
+  return response.data
+}

@@ -18,13 +18,13 @@ export const Route = createRootRoute({
   head: () => META_DATA,
   notFoundComponent: () => <NotFound />,
   component: () => (
-    <RootDocument>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <RootDocument>
         <Outlet />
-      </QueryClientProvider>
-      <Toaster richColors />
-      <TanStackRouterDevtools />
-    </RootDocument>
+        <Toaster richColors />
+        <TanStackRouterDevtools />
+      </RootDocument>
+    </QueryClientProvider>
   ),
 })
 
