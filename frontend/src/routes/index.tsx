@@ -1,8 +1,9 @@
+import type { UserCheckResponse } from '@/shared/types/User'
 import { createFileRoute } from '@tanstack/react-router'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { checkUser } from '@/lib/user_helpers'
 import { userStore } from '@/store/userStore'
+import { apiUser } from '@/lib/user_helpers'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -11,9 +12,11 @@ export const Route = createFileRoute('/')({
 function App() {
   const { data } = useQuery({
     queryKey: ['user'],
-    queryFn: checkUser,
+    queryFn: () => apiUser<UserCheckResponse>('/user'),
   })
-  if (data) userStore.setState(data)
+
+  if (data && 'user' in data) userStore.setState(data)
+
   return (
     <main className="min-h-screen flex flex-col p-5 text-black ">
       <div className=" flex flex-col gap-10">

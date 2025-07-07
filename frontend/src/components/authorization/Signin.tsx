@@ -1,14 +1,15 @@
 import type { SIGN_PAGE_CONTENT, FormData } from '@/types/auth_types'
 import { ACCESS_TOKEN, SIGNIN_MESSAGES } from '@/lib/constants'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import type { UserInsertResponse } from '@/shared/types/User'
 import { Card, CardContent } from '@/components/ui/card'
-import { authUser, inserUser } from '@/lib/user_helpers'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { userSchema } from '@/shared/zod/userSchema'
 import { useMutation } from '@tanstack/react-query'
 import SigninCardHeader from './SigninCardHeader'
 import { capitalaizeLable } from '@/lib/utils'
+import { apiUser } from '@/lib/user_helpers'
 import { LoaderCircle } from 'lucide-react'
 import { TabsContent } from '../ui/tabs'
 import { Button } from '../ui/button'
@@ -39,8 +40,8 @@ const Signin = ({ contentValue }: PageProps) => {
       }
 
       return contentValue === 'signup'
-        ? await inserUser(userToCreate)
-        : await authUser(userToCreate)
+        ? await apiUser<UserInsertResponse>('user', userToCreate)
+        : await apiUser<UserInsertResponse>('user/auth', userToCreate)
     },
     onSuccess: (data) => {
       if ('token' in data) {

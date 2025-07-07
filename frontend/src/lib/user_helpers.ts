@@ -1,26 +1,16 @@
-import type { UserInsertResponse, UserType } from '@/shared/types/User'
+import type { UserType } from '@/shared/types/User'
 import axios from 'axios'
 import api from './api'
 
-export const inserUser = async (body: UserType): Promise<UserInsertResponse> => {
+export const apiUser = async <T>(endpoint: string, body?: UserType,): Promise<T> => {
   try {
-    const response = await api.post('/user', body)
+    const response = body ? await api.post(endpoint, body) : await api.get(endpoint)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.response?.data
+      return error.response?.data as T
     } else {
-      return { error: (error as Error).message }
+      return { error: (error as Error).message } as T
     }
   }
-}
-
-export const authUser = async (body: UserType): Promise<UserInsertResponse> => {
-  const response = await api.post('/user/auth', body)
-  return response.data
-}
-
-export const checkUser = async (): Promise<{ user: string }> => {
-  const response = await api.get('/user')
-  return response.data
 }
